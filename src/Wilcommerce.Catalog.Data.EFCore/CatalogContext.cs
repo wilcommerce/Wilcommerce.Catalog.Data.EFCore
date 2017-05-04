@@ -36,7 +36,8 @@ namespace Wilcommerce.Catalog.Data.EFCore
         {
             modelBuilder
                 .MapBrand()
-                .MapCategory();
+                .MapCategory()
+                .MapProducts();
 
             base.OnModelCreating(modelBuilder);
         }
