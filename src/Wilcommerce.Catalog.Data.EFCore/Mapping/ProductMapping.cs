@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Wilcommerce.Catalog.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Mapping
@@ -52,6 +48,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 
             productMapping
                 .SetupImages();
+
+            productMapping
+                .Ignore(p => p.Categories)
+                .Ignore(p => p.MainCategory);
 
             return modelBuilder;
         }
