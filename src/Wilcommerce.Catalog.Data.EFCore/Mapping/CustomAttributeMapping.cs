@@ -10,9 +10,9 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
             var attributeMapping = modelBuilder.Entity<CustomAttribute>();
 
             attributeMapping
-                .ToTable("Wilcommerce_CustomAttributes");
-                //.Property(a => a._Values)
-                //.HasColumnName("Values");
+                .ToTable("Wilcommerce_CustomAttributes")
+                .Property(a => a._Values)
+                .HasColumnName("Values");
 
             attributeMapping
                 .Ignore(a => a.Values);
