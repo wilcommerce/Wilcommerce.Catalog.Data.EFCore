@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Wilcommerce.Catalog.Data.EFCore.Mapping;
 using Wilcommerce.Catalog.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore
@@ -33,6 +34,18 @@ namespace Wilcommerce.Catalog.Data.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder
+                .MapBrand()
+                .MapCategory()
+                .MapProducts()
+                .MapCustomAttributes()
+                .MapProductAttributes()
+                .MapTierPrices()
+                .MapProductCategories()
+                .MapProductReviews()
+                .MapProductImages()
+                .MapCatalogSettings();
+
             base.OnModelCreating(modelBuilder);
         }
     }
