@@ -1,6 +1,4 @@
 {
-  "version": "1.0.0-beta1",
-
   "dependencies": {
     "Microsoft.EntityFrameworkCore": "1.1.1",
     "Microsoft.EntityFrameworkCore.Design": "1.1.1",
@@ -10,10 +8,22 @@
     "NETStandard.Library": "1.6.1",
     "Wilcommerce.Catalog": "1.0.0-beta4"
   },
-
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
-  }
+  },
+  "packOptions": {
+    "iconUrl": "http://www.wilcommerce.com/logo64.png",
+    "licenseUrl": "https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore/blob/master/LICENSE",
+    "owners": [ "Alberto Mori" ],
+    "projectUrl": "https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore"
+    },
+    "summary": "Wilcommerce catalog implementation for Entity Framework Core",
+    "tags": [ "wilcommerce", "ecommerce", "opensource", ".netcore", ".net", "entity framework core" ]
+  },
+  "version": "1.0.0-beta1"
 }
