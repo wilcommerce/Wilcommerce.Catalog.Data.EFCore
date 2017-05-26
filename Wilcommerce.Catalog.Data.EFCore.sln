@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5B46BFC-B337-4016-9389-7F177173425C}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Wilcommerce.Catalog.Data.EFCore", "src\Wilcommerce.Catalog.Data.EFCore\Wilcommerce.Catalog.Data.EFCore.xproj", "{5AACAFA5-99A3-4E56-86ED-81615ABAE205}"
