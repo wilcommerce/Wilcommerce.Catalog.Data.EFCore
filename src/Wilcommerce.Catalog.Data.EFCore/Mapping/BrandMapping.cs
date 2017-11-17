@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Wilcommerce.Catalog.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Mapping
@@ -15,10 +14,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .HasIndex(b => b.Url).IsUnique();
 
             brandMapping
-                .HasOne(b => b.Seo);
+                .OwnsOne(b => b.Seo);
 
             brandMapping
-                .HasOne(b => b.Logo);
+                .OwnsOne(b => b.Logo);
 
             brandMapping
                 .Property(b => b.Products)

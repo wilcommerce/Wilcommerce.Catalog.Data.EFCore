@@ -63,5 +63,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.ReadModels
         /// Get the list of tier prices
         /// </summary>
         public IQueryable<TierPrice> TierPrices => _context.TierPrices;
+
+        /// <summary>
+        /// Get the product categories
+        /// </summary>
+        public IQueryable<ProductCategory> ProductCategories => _context.ProductCategories;
     }
 }

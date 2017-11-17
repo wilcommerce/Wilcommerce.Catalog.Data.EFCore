@@ -9,7 +9,7 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
         {
             modelBuilder.Entity<TierPrice>()
                 .ToTable("Wilcommerce_TierPrices")
-                .HasOne(t => t.Price);
+                .OwnsOne(t => t.Price);
 
             return modelBuilder;
         }

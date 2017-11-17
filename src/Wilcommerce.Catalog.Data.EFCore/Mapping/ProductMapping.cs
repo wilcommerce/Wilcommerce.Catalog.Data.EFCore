@@ -22,10 +22,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .HasIndex(p => p.Url).IsUnique();
 
             productMapping
-                .HasOne(p => p.Seo);
+                .OwnsOne(p => p.Seo);
             
             productMapping
-                .HasOne(p => p.Price);
+                .OwnsOne(p => p.Price);
 
             productMapping
                 .HasOne(p => p.Vendor)
