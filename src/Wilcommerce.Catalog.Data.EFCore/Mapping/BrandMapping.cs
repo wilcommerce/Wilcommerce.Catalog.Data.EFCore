@@ -19,15 +19,6 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
             brandMapping
                 .OwnsOne(b => b.Logo);
 
-            brandMapping
-                .Property(b => b.Products)
-                .HasField("_products");
-
-            brandMapping
-                .Metadata
-                .FindNavigation(nameof(Brand.Products))
-                .SetPropertyAccessMode(PropertyAccessMode.Field);
-
             return modelBuilder;
         }
     }

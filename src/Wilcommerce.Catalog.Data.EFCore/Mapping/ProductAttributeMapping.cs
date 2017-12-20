@@ -14,6 +14,12 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .HasOne(pa => pa.Attribute)
                 .WithMany();
 
+            attributeMapping
+                .Property(pa => pa._Value)
+                .HasColumnName("Value");
+
+            attributeMapping.Ignore(pa => pa.Value);
+
             return modelBuilder;
         }
     }

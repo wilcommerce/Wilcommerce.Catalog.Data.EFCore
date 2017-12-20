@@ -8,7 +8,8 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
         public static ModelBuilder MapProductCategories(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductCategory>()
-                .ToTable("Wilcommerce_ProductCategories");
+                .ToTable("Wilcommerce_ProductCategories")
+                .HasKey(pc => new { pc.ProductId, pc.CategoryId });
 
             return modelBuilder;
         }

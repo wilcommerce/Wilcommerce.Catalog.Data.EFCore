@@ -29,7 +29,7 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 
             productMapping
                 .HasOne(p => p.Vendor)
-                .WithMany(b => b.Products);
+                .WithMany();
 
             productMapping
                 .SetupTierPrices();
@@ -59,40 +59,33 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
         private static void SetupVariants(this EntityTypeBuilder<Product> productMapping)
         {
             productMapping
-                .Property(p => p.Variants)
-                .HasField("_variants");
+                .HasMany(p => p.Variants)
+                .WithOne(p => p.MainProduct);
 
             productMapping
                 .Metadata
                 .FindNavigation(nameof(Product.Variants))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            productMapping
-                .HasMany(p => p.Variants)
-                .WithOne(p => p.MainProduct);
         }
 
         private static void SetupTierPrices(this EntityTypeBuilder<Product> productMapping)
         {
             productMapping
-                .Property(p => p.TierPrices)
-                .HasField("_tierPrices");
+                .HasMany(p => p.TierPrices)
+                .WithOne(t => t.Product);
 
             productMapping
                 .Metadata
                 .FindNavigation(nameof(Product.TierPrices))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            productMapping
-                .HasMany(p => p.TierPrices)
-                .WithOne(t => t.Product);
         }
 
         private static void SetupCategories(this EntityTypeBuilder<Product> productMapping)
         {
             productMapping
-                .Property(p => p.ProductCategories)
-                .HasField("_categories");
+                .HasMany(p => p.ProductCategories)
+                .WithOne(pc => pc.Product)
+                .HasForeignKey(pc => pc.ProductId);
 
             productMapping
                 .Metadata
@@ -100,57 +93,45 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
 
             productMapping
-                .HasMany(p => p.ProductCategories)
-                .WithOne(pc => pc.Product)
-                .HasForeignKey(pc => pc.ProductId);
+                .Metadata
+                .FindNavigation(nameof(Product.ProductCategories))
+                .SetField("_categories");
         }
 
         private static void SetupAttributes(this EntityTypeBuilder<Product> productMapping)
         {
             productMapping
-                .Property(p => p.Attributes)
-                .HasField("_attributes");
+                .HasMany(p => p.Attributes)
+                .WithOne(a => a.Product);
 
             productMapping
                 .Metadata
                 .FindNavigation(nameof(Product.Attributes))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            productMapping
-                .HasMany(p => p.Attributes)
-                .WithOne(a => a.Product);
         }
 
         private static void SetupReviews(this EntityTypeBuilder<Product> productMapping)
         {
             productMapping
-                .Property(p => p.Reviews)
-                .HasField("_reviews");
+                .HasMany(p => p.Reviews)
+                .WithOne(r => r.Product);
 
             productMapping
                 .Metadata
                 .FindNavigation(nameof(Product.Reviews))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            productMapping
-                .HasMany(p => p.Reviews)
-                .WithOne(r => r.Product);
         }
 
         private static void SetupImages(this EntityTypeBuilder<Product> productMapping)
         {
             productMapping
-                .Property(p => p.Images)
-                .HasField("_images");
+                .HasMany(p => p.Images)
+                .WithOne(i => i.Product);
 
             productMapping
                 .Metadata
                 .FindNavigation(nameof(Product.Images))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            productMapping
-                .HasMany(p => p.Images)
-                .WithOne(i => i.Product);
         }
     }
 }

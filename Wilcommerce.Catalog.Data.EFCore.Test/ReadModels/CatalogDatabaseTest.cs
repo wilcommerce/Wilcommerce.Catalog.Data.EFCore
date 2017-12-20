@@ -1,0 +1,26 @@
+﻿using Wilcommerce.Catalog.Data.EFCore.ReadModels;
+using Wilcommerce.Catalog.Data.EFCore.Test.Fixtures;
+using Xunit;
+
+namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
+{
+    public class CatalogDatabaseTest : IClassFixture<CatalogContextFixture>
+    {
+        private CatalogContextFixture _fixture;
+
+        private CatalogDatabase _database;
+
+        public CatalogDatabaseTest(CatalogContextFixture fixture)
+        {
+            _fixture = fixture;
+            _database = new CatalogDatabase(_fixture.Context);
+        }
+        
+        [Fact]
+        public void Products_Must_Have_AtLeast_One_Record()
+        {
+            var products = _database.Products;
+            Assert.NotEmpty(products);
+        }
+    }
+}
