@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Wilcommerce.Catalog.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Mapping
