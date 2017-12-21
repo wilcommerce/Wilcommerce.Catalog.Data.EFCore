@@ -26,3 +26,6 @@ The Repository class is the implementation of the [IRepository](https://github.c
 
 It provides all the methods useful for persist an Aggregate model. 
 It requires a CatalogContext instance as constructor parameter.
+
+# Contributing
+If you want to contribute to Wilcommerce please, check the [CONTRIBUTING](CONTRIBUTING.md) file.
