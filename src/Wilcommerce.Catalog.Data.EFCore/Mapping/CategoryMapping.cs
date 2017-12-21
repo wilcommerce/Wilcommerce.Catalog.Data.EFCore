@@ -1,11 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Wilcommerce.Catalog.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 {
+    /// <summary>
+    /// Defines the modelBuilder's extension methods to map the <see cref="Category"/> class
+    /// </summary>
     public static class CategoryMapping
     {
+        /// <summary>
+        /// Extension method. Map the category class
+        /// </summary>
+        /// <param name="modelBuilder">The modelBuilder instance</param>
+        /// <returns>The modelBuilder instance</returns>
         public static ModelBuilder MapCategory(this ModelBuilder modelBuilder)
         {
             var categoryMapping = modelBuilder.Entity<Category>();
@@ -18,10 +25,11 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .HasIndex(c => c.Url).IsUnique();
 
             categoryMapping
-                .HasOne(c => c.Seo);
+                .OwnsOne(c => c.Seo);
 
-            categoryMapping.Property(c => c.Children)
-                .HasField("_children");
+            categoryMapping
+                .HasMany(c => c.Children)
+                .WithOne(c => c.Parent);
 
             categoryMapping
                 .Metadata
@@ -29,21 +37,14 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
 
             categoryMapping
-                .HasMany(c => c.Children)
-                .WithOne(c => c.Parent);
-
-            categoryMapping.Property(c => c.Products)
-                .HasField("_products");
+                .HasMany(c => c.Products)
+                .WithOne(pc => pc.Category)
+                .HasForeignKey(pc => pc.CategoryId);
 
             categoryMapping
                 .Metadata
                 .FindNavigation(nameof(Category.Products))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            categoryMapping
-                .HasMany(c => c.Products)
-                .WithOne(pc => pc.Category)
-                .HasForeignKey(pc => pc.CategoryId);
 
             return modelBuilder;
         }

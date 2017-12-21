@@ -14,6 +14,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.ReadModels
         /// </summary>
         protected CatalogContext _context;
 
+        /// <summary>
+        /// Construct the catalog database
+        /// </summary>
+        /// <param name="context">The instance of the catalog context</param>
         public CatalogDatabase(CatalogContext context)
         {
             _context = context;
@@ -63,5 +67,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.ReadModels
         /// Get the list of tier prices
         /// </summary>
         public IQueryable<TierPrice> TierPrices => _context.TierPrices;
+
+        /// <summary>
+        /// Get the product categories
+        /// </summary>
+        public IQueryable<ProductCategory> ProductCategories => _context.ProductCategories;
     }
 }
