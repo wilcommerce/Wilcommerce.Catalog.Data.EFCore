@@ -35,9 +35,9 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Product_Must_Contains_TierPrices()
         {
-            var product = _database.Products.Active().FirstOrDefault();
-            Assert.NotNull(product);
+            var product = _database.Products.FirstOrDefault(p => p.TierPriceEnabled && p.TierPrices.Any());
 
+            Assert.NotNull(product);
             Assert.True(product.TierPrices.Any());
         }
     }
