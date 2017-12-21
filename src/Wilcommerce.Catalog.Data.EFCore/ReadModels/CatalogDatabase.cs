@@ -14,6 +14,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.ReadModels
         /// </summary>
         protected CatalogContext _context;
 
+        /// <summary>
+        /// Construct the catalog database
+        /// </summary>
+        /// <param name="context">The instance of the catalog context</param>
         public CatalogDatabase(CatalogContext context)
         {
             _context = context;

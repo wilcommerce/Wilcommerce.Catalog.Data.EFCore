@@ -3,8 +3,16 @@ using Wilcommerce.Catalog.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 {
+    /// <summary>
+    /// Defines the modelBuilder's extension methods to map the <see cref="Category"/> class
+    /// </summary>
     public static class CategoryMapping
     {
+        /// <summary>
+        /// Extension method. Map the category class
+        /// </summary>
+        /// <param name="modelBuilder">The modelBuilder instance</param>
+        /// <returns>The modelBuilder instance</returns>
         public static ModelBuilder MapCategory(this ModelBuilder modelBuilder)
         {
             var categoryMapping = modelBuilder.Entity<Category>();

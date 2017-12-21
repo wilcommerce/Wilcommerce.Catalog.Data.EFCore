@@ -14,6 +14,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.Repository
         /// </summary>
         protected CatalogContext _context;
 
+        /// <summary>
+        /// Construct the repository for the catalog context
+        /// </summary>
+        /// <param name="context">The catalog context instance</param>
         public Repository(CatalogContext context)
         {
             _context = context;
