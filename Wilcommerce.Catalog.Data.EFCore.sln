@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{46DC1F22-3163-48DF-B8D4-DB2613BF75B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5B46BFC-B337-4016-9389-7F177173425C}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -14,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wilcommerce.Catalog.Data.EF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4053B050-B257-4042-ACD7-EFEA6BE0696C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wilcommerce.Catalog.Data.EFCore.Test", "Wilcommerce.Catalog.Data.EFCore.Test\Wilcommerce.Catalog.Data.EFCore.Test.csproj", "{7BFD08E3-594F-442A-A495-F0A31CC51C4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wilcommerce.Catalog.Data.EFCore.Test", "Wilcommerce.Catalog.Data.EFCore.Test\Wilcommerce.Catalog.Data.EFCore.Test.csproj", "{7BFD08E3-594F-442A-A495-F0A31CC51C4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
