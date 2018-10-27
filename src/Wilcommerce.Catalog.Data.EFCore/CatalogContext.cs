@@ -15,11 +15,6 @@ namespace Wilcommerce.Catalog.Data.EFCore
         public virtual DbSet<Brand> Brands { get; set; }
 
         /// <summary>
-        /// Get or set the list of catalog settings
-        /// </summary>
-        public virtual DbSet<CatalogSettings> CatalogSettings { get; set; }
-
-        /// <summary>
         /// Get or set the list of categories
         /// </summary>
         public virtual DbSet<Category> Categories { get; set; }
@@ -84,8 +79,7 @@ namespace Wilcommerce.Catalog.Data.EFCore
                 .MapTierPrices()
                 .MapProductCategories()
                 .MapProductReviews()
-                .MapProductImages()
-                .MapCatalogSettings();
+                .MapProductImages();
 
             base.OnModelCreating(modelBuilder);
         }
