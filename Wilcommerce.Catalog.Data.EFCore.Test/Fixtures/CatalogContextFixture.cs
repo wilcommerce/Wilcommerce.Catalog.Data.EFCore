@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using Wilcommerce.Catalog.Models;
-using Wilcommerce.Core.Common.Domain.Models;
+using Wilcommerce.Core.Common.Models;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Test.Fixtures
 {
@@ -30,9 +30,6 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Fixtures
         {
             var category = Category.Create("CAT01", "Category1", "category1");
             Context.Categories.Add(category);
-
-            var settings = CatalogSettings.Create(20, 20, CatalogSettings.ViewType.LIST, CatalogSettings.ViewType.LIST);
-            Context.CatalogSettings.Add(settings);
 
             var brand = Brand.Create("MyBrand", "mybrand");
             Context.Brands.Add(brand);
@@ -68,8 +65,6 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Fixtures
             Context.Products.RemoveRange(Context.Products);
             Context.CustomAttributes.RemoveRange(Context.CustomAttributes);
             Context.Brands.RemoveRange(Context.Brands);
-            Context.CatalogSettings.RemoveRange(Context.CatalogSettings);
-            Context.Categories.RemoveRange(Context.Categories);
         }
 
         protected virtual void BuildContext()

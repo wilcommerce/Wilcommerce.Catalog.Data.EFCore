@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Wilcommerce.Catalog.Data.EFCore.ReadModels;
 using Wilcommerce.Catalog.Data.EFCore.Test.Fixtures;
-using Wilcommerce.Catalog.ReadModels;
 using Xunit;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
