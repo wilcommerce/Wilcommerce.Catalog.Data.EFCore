@@ -32,19 +32,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
                 .WithOne(c => c.Parent);
 
             categoryMapping
-                .Metadata
-                .FindNavigation(nameof(Category.Children))
-                .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            categoryMapping
                 .HasMany(c => c.Products)
                 .WithOne(pc => pc.Category)
                 .HasForeignKey(pc => pc.CategoryId);
 
-            categoryMapping
-                .Metadata
-                .FindNavigation(nameof(Category.Products))
-                .SetPropertyAccessMode(PropertyAccessMode.Field);
 
             return modelBuilder;
         }
