@@ -20,7 +20,7 @@ namespace Wilcommerce.Catalog.Data.EFCore.ReadModels
         /// <param name="context">The instance of the catalog context</param>
         public CatalogDatabase(CatalogContext context)
         {
-            _context = context;
+            _context = context ?? throw new System.ArgumentNullException(nameof(context));
         }
 
         /// <summary>

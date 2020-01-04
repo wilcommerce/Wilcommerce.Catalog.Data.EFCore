@@ -29,6 +29,9 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Fixtures
         protected virtual void PrepareData()
         {
             var category = Category.Create("CAT01", "Category1", "category1");
+            var child = Category.Create("CHILD01", "Child1", "child1");
+            category.AddChild(child);
+
             Context.Categories.Add(category);
 
             var brand = Brand.Create("MyBrand", "mybrand");
@@ -38,8 +41,6 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Fixtures
             Context.CustomAttributes.Add(customAttribute);
 
             var product = Product.Create("EAN", "SKU", "First Product", "first-product");
-            Context.Products.Add(product);
-
             product.EnableTierPrices();
             product.AddTierPrice(1, 10, new Currency
             {
@@ -51,6 +52,9 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Fixtures
             product.AddImage("/path/to/image.jpg", "MyImage", "image", true, DateTime.Now);
             product.AddAttribute(customAttribute, "#fff");
             product.AddMainCategory(category);
+            product.SetVendor(brand);
+
+            Context.Products.Add(product);
 
             Context.SaveChanges();
         }

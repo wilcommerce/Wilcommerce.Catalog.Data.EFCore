@@ -20,7 +20,7 @@ namespace Wilcommerce.Catalog.Data.EFCore.Repository
         /// <param name="context">The catalog context instance</param>
         public Repository(CatalogContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         /// <summary>

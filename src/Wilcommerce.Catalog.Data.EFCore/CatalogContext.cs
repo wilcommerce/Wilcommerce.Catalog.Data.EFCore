@@ -67,6 +67,16 @@ namespace Wilcommerce.Catalog.Data.EFCore
         /// <summary>
         /// Override the <see cref="DbContext.OnModelCreating(ModelBuilder)"/>
         /// </summary>
+        /// <param name="optionsBuilder">The options builder instance</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
+        /// <summary>
+        /// Override the <see cref="DbContext.OnModelCreating(ModelBuilder)"/>
+        /// </summary>
         /// <param name="modelBuilder">The model builder instance</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
