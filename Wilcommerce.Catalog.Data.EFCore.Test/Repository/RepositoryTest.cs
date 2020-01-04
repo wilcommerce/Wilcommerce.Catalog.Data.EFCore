@@ -1,7 +1,13 @@
-﻿using System.Linq;
+﻿using Moq;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Wilcommerce.Catalog.Commands;
 using Wilcommerce.Catalog.Data.EFCore.ReadModels;
 using Wilcommerce.Catalog.Data.EFCore.Test.Fixtures;
 using Wilcommerce.Catalog.Models;
+using Wilcommerce.Core.Common.Models;
+using Wilcommerce.Core.Infrastructure;
 using Xunit;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Test.Repository
@@ -22,26 +28,60 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Repository
         }
 
         [Fact]
-        public void Add_New_Product_Should_Increment_Products_Number()
+        public async Task Add_New_Product_Should_Increment_Products_Number()
         {
             var productsCount = _database.Products.Count();
 
             var product = Product.Create("EAN", "SKU", "Product #1", "product-1");
             _repository.Add(product);
-            _repository.SaveChanges();
+            await _repository.SaveChangesAsync();
 
             Assert.Equal(productsCount + 1, _database.Products.Count());
         }
 
         [Fact]
-        public void GetByKey_Should_Return_The_Product_Found()
+        public async Task GetByKey_Should_Return_The_Product_Found()
         {
             var productId = _database.Products.FirstOrDefault(p => p.Name == "First Product" && p.Url == "first-product").Id;
-            var product = _repository.GetByKey<Product>(productId);
+            var product = await _repository.GetByKeyAsync<Product>(productId);
 
             Assert.NotNull(product);
             Assert.Equal("First Product", product.Name);
             Assert.Equal("first-product", product.Url);
+        }
+
+        [Fact]
+        public async Task Edit_Product_Information_Should_Change_Product_Values()
+        {
+            var product = _database.Products.FirstOrDefault(p => p.Name == "First Product" && p.Url == "first-product");
+            
+            Guid productId = product.Id;
+            string ean = "newEAN";
+            string sku = "newSKU";
+            string name = "First Product";
+            string url = "first-product";
+            Currency price = new Currency { Code = "EUR", Amount = 10 };
+            string description = "description";
+            int unitInStock = 2;
+            bool isOnSale = true;
+            DateTime? onSaleFrom = DateTime.Today;
+            DateTime? onSaleTo = DateTime.Today.AddMonths(6);
+
+            var eventBus = new Mock<IEventBus>().Object;
+            var commands = new ProductCommands(_repository, eventBus);
+
+            await commands.UpdateProductInfo(productId, ean, sku, name, url, price, description, unitInStock, isOnSale, onSaleFrom, onSaleTo);
+
+            Assert.Equal(ean, product.EanCode);
+            Assert.Equal(sku, product.Sku);
+            Assert.Equal(name, product.Name);
+            Assert.Equal(url, product.Url);
+            Assert.Equal(price, product.Price);
+            Assert.Equal(description, product.Description);
+            Assert.Equal(unitInStock, product.UnitInStock);
+            Assert.Equal(isOnSale, product.IsOnSale);
+            Assert.Equal(onSaleFrom, product.OnSaleFrom);
+            Assert.Equal(onSaleTo, product.OnSaleTo);
         }
     }
 }

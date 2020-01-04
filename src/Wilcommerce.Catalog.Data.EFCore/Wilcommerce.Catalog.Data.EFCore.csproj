@@ -6,17 +6,25 @@
     <AssemblyName>Wilcommerce.Catalog.Data.EFCore</AssemblyName>
     <PackageId>Wilcommerce.Catalog.Data.EFCore</PackageId>
     <PackageTags>wilcommerce;ecommerce;opensource;.netcore;.net;entity framework core</PackageTags>
-    <PackageIconUrl>http://www.wilcommerce.com/logo64.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore</RepositoryUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>1.0.0-rc4</Version>
+    <Version>1.0.0</Version>
     <Authors>Alberto Mori</Authors>
+    <Title>Wilcommerce.Catalog.Data.EFCore</Title>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\Wilcommerce.Catalog.Data.EFCore.xml</DocumentationFile>
@@ -39,7 +47,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Wilcommerce.Catalog" Version="1.0.0" />
+    <PackageReference Include="Wilcommerce.Catalog" Version="1.0.1" />
   </ItemGroup>
 
 </Project>
