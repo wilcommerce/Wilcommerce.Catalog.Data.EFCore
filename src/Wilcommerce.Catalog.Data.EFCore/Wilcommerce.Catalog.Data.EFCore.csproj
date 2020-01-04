@@ -5,7 +5,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>Wilcommerce.Catalog.Data.EFCore</AssemblyName>
     <PackageId>Wilcommerce.Catalog.Data.EFCore</PackageId>
-    <PackageTags>wilcommerce;ecommerce;opensource;.netcore;.net;entity framework core</PackageTags>
+    <PackageTags>wilcommerce;ecommerce;opensource;.netcore;.net;entity framework core;catalog</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/wilcommerce/Wilcommerce.Catalog.Data.EFCore</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
@@ -14,8 +14,10 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <Version>1.0.0</Version>
+    <PackageReleaseNotes>Move to .NETStandard 2.1</PackageReleaseNotes>
     <Authors>Alberto Mori</Authors>
     <Title>Wilcommerce.Catalog.Data.EFCore</Title>
+    <Description>Wilcommerce Catalog implementation for Entity Framework Core</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
