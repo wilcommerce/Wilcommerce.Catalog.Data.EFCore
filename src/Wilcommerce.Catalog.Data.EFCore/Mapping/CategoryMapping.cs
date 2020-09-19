@@ -19,6 +19,13 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 
             categoryMapping
                 .ToTable("Wilcommerce_Categories")
+                .HasKey(c => c.Id);
+
+            categoryMapping
+                .Property(c => c.Id)
+                .ValueGeneratedNever();
+
+            categoryMapping
                 .HasIndex(c => c.Code).IsUnique();
 
             categoryMapping

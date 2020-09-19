@@ -6,6 +6,7 @@ using Wilcommerce.Catalog.Commands;
 using Wilcommerce.Catalog.Data.EFCore.ReadModels;
 using Wilcommerce.Catalog.Data.EFCore.Test.Fixtures;
 using Wilcommerce.Catalog.Models;
+using Wilcommerce.Catalog.ReadModels;
 using Wilcommerce.Core.Common.Models;
 using Wilcommerce.Core.Infrastructure;
 using Xunit;
@@ -82,6 +83,31 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Repository
             Assert.Equal(isOnSale, product.IsOnSale);
             Assert.Equal(onSaleFrom, product.OnSaleFrom);
             Assert.Equal(onSaleTo, product.OnSaleTo);
+        }
+
+        [Fact]
+        public async Task AddProductVariant_Should_Add_Variant_Correctly()
+        {
+            var product = _database.Products.FirstOrDefault(p => p.Name == "First Product" && p.Url == "first-product");
+
+            var eventBus = new Mock<IEventBus>().Object;
+            var commands = new ProductCommands(_repository, eventBus);
+
+            Guid productId = product.Id;
+            string name = "first product variant";
+            string ean = "Ean001";
+            string sku = "Sku001";
+            Currency price = new Currency { Code = "EUR", Amount = 100 };
+
+            await commands.AddProductVariant(productId, name, ean, sku, price);
+
+            var variantAdded = _database.Products.VariantsOf(productId).FirstOrDefault(v => v.EanCode == ean && v.Sku == sku);
+
+            Assert.NotNull(variantAdded);
+            Assert.Equal(name, variantAdded.Name);
+            Assert.Equal(ean, variantAdded.EanCode);
+            Assert.Equal(sku, variantAdded.Sku);
+            Assert.Equal(price, variantAdded.Price);
         }
     }
 }

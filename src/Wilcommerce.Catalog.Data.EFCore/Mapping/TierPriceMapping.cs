@@ -17,6 +17,13 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
         {
             modelBuilder.Entity<TierPrice>()
                 .ToTable("Wilcommerce_TierPrices")
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<TierPrice>()
+                .Property(t => t.Id)
+                .ValueGeneratedNever();
+
+            modelBuilder.Entity<TierPrice>()
                 .OwnsOne(t => t.Price);
 
             return modelBuilder;

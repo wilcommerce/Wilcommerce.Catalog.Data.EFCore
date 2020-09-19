@@ -16,7 +16,12 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
         public static ModelBuilder MapProductReviews(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductReview>()
-                .ToTable("Wilcommerce_ProductReviews");
+                .ToTable("Wilcommerce_ProductReviews")
+                .HasKey(pr => pr.Id);
+
+            modelBuilder.Entity<ProductReview>()
+                .Property(pr => pr.Id)
+                .ValueGeneratedNever();
 
             return modelBuilder;
         }

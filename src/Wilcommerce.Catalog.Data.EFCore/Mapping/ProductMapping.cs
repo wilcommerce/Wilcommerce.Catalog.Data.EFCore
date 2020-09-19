@@ -20,6 +20,13 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 
             productMapping
                 .ToTable("Wilcommerce_Products")
+                .HasKey(p => p.Id);
+
+            productMapping
+                .Property(p => p.Id)
+                .ValueGeneratedNever();
+
+            productMapping
                 .HasIndex(p => p.EanCode).IsUnique();
 
             productMapping
