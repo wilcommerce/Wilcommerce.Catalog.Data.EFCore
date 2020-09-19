@@ -16,7 +16,12 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
         public static ModelBuilder MapProductImages(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductImage>()
-                .ToTable("Wilcommerce_ProductImages");
+                .ToTable("Wilcommerce_ProductImages")
+                .HasKey(pi => pi.Id);
+
+            modelBuilder.Entity<ProductImage>()
+                .Property(pi => pi.Id)
+                .ValueGeneratedNever();
 
             return modelBuilder;
         }

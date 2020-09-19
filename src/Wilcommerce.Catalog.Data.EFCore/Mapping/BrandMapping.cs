@@ -19,6 +19,13 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 
             brandMapping
                 .ToTable("Wilcommerce_Brands")
+                .HasKey(b => b.Id);
+
+            brandMapping
+                .Property(b => b.Id)
+                .ValueGeneratedNever();
+
+            brandMapping
                 .HasIndex(b => b.Url).IsUnique();
 
             brandMapping

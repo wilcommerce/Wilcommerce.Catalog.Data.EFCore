@@ -19,6 +19,13 @@ namespace Wilcommerce.Catalog.Data.EFCore.Mapping
 
             attributeMapping
                 .ToTable("Wilcommerce_CustomAttributes")
+                .HasKey(a => a.Id);
+
+            attributeMapping
+                .Property(a => a.Id)
+                .ValueGeneratedNever();
+
+            attributeMapping
                 .Property(a => a._Values)
                 .HasColumnName("Values");
 
