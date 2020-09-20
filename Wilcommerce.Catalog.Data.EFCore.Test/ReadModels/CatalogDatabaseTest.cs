@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Linq;
 using Wilcommerce.Catalog.Data.EFCore.ReadModels;
 using Wilcommerce.Catalog.Data.EFCore.Test.Fixtures;
+using Wilcommerce.Catalog.ReadModels;
 using Xunit;
 
 namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
@@ -28,7 +30,11 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Categories_Should_Contain_A_Category_With_Code_CAT01_And_One_Children()
         {
-            var category = _database.Categories.Where(c => c.Code == "CAT01").FirstOrDefault();
+            var category = _database.Categories
+                .Include(c => c.Children)
+                .Where(c => c.Code == "CAT01")
+                .FirstOrDefault();
+
             Assert.NotNull(category);
             Assert.True(category.Children.Count == 1);
         }
@@ -36,7 +42,11 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Categories_Should_Contain_A_Category_With_Code_CHILD01_And_A_Parent()
         {
-            var category = _database.Categories.Where(c => c.Code == "CHILD01").FirstOrDefault();
+            var category = _database.Categories
+                .Include(c => c.Parent)
+                .Where(c => c.Code == "CHILD01")
+                .FirstOrDefault();
+
             Assert.NotNull(category);
             Assert.NotNull(category.Parent);
             Assert.Equal("CAT01", category.Parent.Code);
@@ -59,7 +69,11 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Products_Should_Contain_A_Product_With_A_Tier_Price_With_Quantity_From_1_To_10_And_Price_Amount_Equal_To_20()
         {
-            var product = _database.Products.Where(p => p.TierPrices.Count > 0).FirstOrDefault();
+            var product = _database.Products
+                .Include(p => p.TierPrices)
+                .Where(p => p.TierPrices.Count > 0)
+                .FirstOrDefault();
+
             var tierPrice = product?.TierPrices.FirstOrDefault(t => t.FromQuantity == 1 && t.ToQuantity == 10 && t.Price.Amount == 20);
 
             Assert.NotNull(product);
@@ -69,7 +83,11 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Products_Should_Contain_A_Product_With_A_Review_By_Alberto_And_With_A_Rating_Of_10()
         {
-            var product = _database.Products.Where(p => p.Reviews.Count > 0).FirstOrDefault();
+            var product = _database.Products
+                .Include(p => p.Reviews)
+                .Where(p => p.Reviews.Count > 0)
+                .FirstOrDefault();
+
             var review = product.Reviews.FirstOrDefault(r => r.Name == "Alberto" && r.Rating == 10);
 
             Assert.NotNull(product);
@@ -79,7 +97,11 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Products_Should_Contain_A_Product_With_An_Image_Marked_As_Main_And_With_Name_Equal_To_MyImage()
         {
-            var product = _database.Products.Where(p => p.Images.Count > 0).FirstOrDefault();
+            var product = _database.Products
+                .Include(p => p.Images)
+                .Where(p => p.Images.Count > 0)
+                .FirstOrDefault();
+
             var image = product.Images.FirstOrDefault(i => i.IsMain && i.Name == "MyImage");
 
             Assert.NotNull(product);
@@ -91,8 +113,16 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         {
             string value = JsonConvert.SerializeObject("#fff");
 
-            var product = _database.Products.Where(p => p.Attributes.Count > 0).FirstOrDefault();
-            var attribute = product.Attributes.FirstOrDefault(a => a.Attribute.Name == "color" && a._Value == value);
+            var product = _database.Products
+                .Include(p => p.Attributes)
+                .Where(p => p.Attributes.Count > 0)
+                .FirstOrDefault();
+
+            var attribute = _database.ProductAttributes
+                .Include(a => a.Attribute)
+                .Include(a => a.Product)
+                .ByProduct(product.Id)
+                .FirstOrDefault(a => a.Attribute.Name == "color" && a._Value == value);
 
             Assert.NotNull(product);
             Assert.NotNull(attribute);
@@ -101,8 +131,15 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Products_Should_Contain_A_Product_With_A_Category_Marked_As_Main_And_With_Code_Equal_To_CAT01()
         {
-            var product = _database.Products.Where(p => p.ProductCategories.Any(c => c.IsMain)).FirstOrDefault();
-            var category = product.ProductCategories.FirstOrDefault(c => c.IsMain && c.Category.Code == "CAT01");
+            var product = _database.Products
+                .Include(p => p.ProductCategories)
+                .Where(p => p.ProductCategories.Any(c => c.IsMain))
+                .FirstOrDefault();
+
+            var category = _database.ProductCategories
+                .Include(c => c.Category)
+                .Where(c => c.ProductId == product.Id)
+                .FirstOrDefault(c => c.IsMain && c.Category.Code == "CAT01");
 
             Assert.NotNull(product);
             Assert.NotNull(category);
@@ -111,7 +148,10 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.ReadModels
         [Fact]
         public void Products_Should_Contain_A_Product_With_A_Vendor_Named_MyBrand()
         {
-            var product = _database.Products.Where(p => p.Vendor != null && p.Vendor.Name == "MyBrand").FirstOrDefault();
+            var product = _database.Products
+                .Include(p => p.Vendor)
+                .Where(p => p.Vendor != null && p.Vendor.Name == "MyBrand")
+                .FirstOrDefault();
             Assert.NotNull(product);
             Assert.NotNull(product.Vendor);
         }

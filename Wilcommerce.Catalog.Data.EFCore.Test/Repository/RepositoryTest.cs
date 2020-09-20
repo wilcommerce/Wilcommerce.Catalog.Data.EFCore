@@ -73,16 +73,18 @@ namespace Wilcommerce.Catalog.Data.EFCore.Test.Repository
 
             await commands.UpdateProductInfo(productId, ean, sku, name, url, price, description, unitInStock, isOnSale, onSaleFrom, onSaleTo);
 
-            Assert.Equal(ean, product.EanCode);
-            Assert.Equal(sku, product.Sku);
-            Assert.Equal(name, product.Name);
-            Assert.Equal(url, product.Url);
-            Assert.Equal(price, product.Price);
-            Assert.Equal(description, product.Description);
-            Assert.Equal(unitInStock, product.UnitInStock);
-            Assert.Equal(isOnSale, product.IsOnSale);
-            Assert.Equal(onSaleFrom, product.OnSaleFrom);
-            Assert.Equal(onSaleTo, product.OnSaleTo);
+            var updatedProduct = _database.Products.FirstOrDefault(p => p.Id == productId);
+
+            Assert.Equal(ean, updatedProduct.EanCode);
+            Assert.Equal(sku, updatedProduct.Sku);
+            Assert.Equal(name, updatedProduct.Name);
+            Assert.Equal(url, updatedProduct.Url);
+            Assert.Equal(price, updatedProduct.Price);
+            Assert.Equal(description, updatedProduct.Description);
+            Assert.Equal(unitInStock, updatedProduct.UnitInStock);
+            Assert.Equal(isOnSale, updatedProduct.IsOnSale);
+            Assert.Equal(onSaleFrom, updatedProduct.OnSaleFrom);
+            Assert.Equal(onSaleTo, updatedProduct.OnSaleTo);
         }
 
         [Fact]
